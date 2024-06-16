@@ -1,15 +1,21 @@
-import { useState } from "react";
-
-function App() {
+import React, { useEffect, useState } from "react";
+import Home from "./pages/home/Home";
+import Genre from "./pages/genre/Genre";
+import Favourites from "./pages/favourites/Favourites";
+import MovieDetails from "./pages/movieDetails/MovieDetails";
+import axios from "axios";
+import { Routes, Route } from "react-router-dom";
+const App = () => {
   return (
     <>
-      <div className="bg-gray-400 h-screen">
-        <h1 className="text-2xl text-center font-semibold bg-red-600 p-2">
-          MovieVerse
-        </h1>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/genre" element={<Genre />} />
+        <Route path="/favourites" element={<Favourites />} />
+        <Route path="/:movieId" element={<MovieDetails />} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;
