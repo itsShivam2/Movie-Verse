@@ -59,11 +59,8 @@ const List = ({ movies }) => {
         swipeable
       >
         {movies.map((movie) => (
-          <div
-            key={movie.id}
-            className="flex flex-col items-center p-2"
-          >
-            <Link to={`/${movie.id}`}>
+          <div key={movie.id} className="flex flex-col items-center p-2">
+            <Link to={`/${movie.media_type}/${movie.id}`}>
               <div className="flex flex-col items-center">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
