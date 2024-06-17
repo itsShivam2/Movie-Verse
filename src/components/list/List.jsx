@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 
-const List = ({ movies }) => {
+const List = ({ movies, mediaType }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -60,7 +60,7 @@ const List = ({ movies }) => {
       >
         {movies.map((movie) => (
           <div key={movie.id} className="flex flex-col items-center p-2">
-            <Link to={`/${movie.media_type}/${movie.id}`}>
+            <Link to={`/${mediaType}/${movie.id}`}>
               <div className="flex flex-col items-center">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}

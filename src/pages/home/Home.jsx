@@ -146,25 +146,25 @@ function Home() {
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated Movies
                 </h1>
-                <List movies={topRatedMovies} />
+                <List movies={topRatedMovies} mediaType="movie" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Popular Movies
                 </h1>
-                <List movies={popularMovies} />
+                <List movies={popularMovies} mediaType="movie" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated TV Shows
                 </h1>
-                <List movies={topRatedTVShows} />
+                <List movies={topRatedTVShows} mediaType="tv" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
                   Popular TV Shows
                 </h1>
-                <List movies={popularTVShows} />
+                <List movies={popularTVShows} mediaType="tv" />
               </div>
             </div>
           )}
