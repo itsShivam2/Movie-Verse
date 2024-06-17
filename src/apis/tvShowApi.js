@@ -22,3 +22,5 @@ export const searchTVShows = async (query) => {
   const response = await axios.get(`${BASE_URL}/search/tv?api_key=${API_KEY}&query=${query}`);
   return response.data.results;
 };
+
+
