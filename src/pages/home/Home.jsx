@@ -80,17 +80,17 @@ function Home() {
 
   return (
     <div className="w-full bg-gray-900 text-white py-6 px-auto">
-      <section className="mb-6">
+      <section className="mb-14">
         <div className="text-center">
-          <h1 className="text-6xl font-bold my-4">WELCOME</h1>
-          <p className="text-lg font-semibold">
+          <h1 className="text-5xl sm:text-6xl font-bold my-4 p-2">WELCOME</h1>
+          <p className="text-base font-semibold p-2">
             Explore the Ultimate Entertainment Universe: Discover Movies and TV
             Shows with MovieVerse!
           </p>
         </div>
-        <div className="w-full flex justify-center items-center my-10">
+        <div className="w-full flex justify-center items-center my-10 px-4">
           <input
-            className="w-3/6 p-4 rounded-l-lg text-black"
+            className="w-4/6 sm:w-3/6 p-4 rounded-l-2xl text-black text-xs sm:text-base"
             type="text"
             name="search"
             id="search"
@@ -99,8 +99,8 @@ function Home() {
             placeholder="Search for Movies & TV Shows"
           />
           <button
-            onClick={handleSearch} 
-            className="w-1/6 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 rounded-lg text-white font-bold p-4 rounded-r-lg"
+            onClick={handleSearch}
+            className="w-2/6 sm:w-1/6 bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 text-white text-xs sm:text-base font-bold py-4 px-3 sm:p-4 rounded-r-2xl"
           >
             Search
           </button>
@@ -109,17 +109,17 @@ function Home() {
 
       <div>
         <div className="w-full flex justify-end items-center mr-8 px-3">
-          <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+          <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-2xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Movies
           </button>
-          <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+          <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-2xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
             TV Shows
           </button>
         </div>
         <div>
           {searchResults.length > 0 ? (
             <div>
-              <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
+              <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                 Search Results
               </h1>
               <MovieList movies={searchResults} />
@@ -127,19 +127,19 @@ function Home() {
           ) : (
             <div>
               <div>
-                <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
+                <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated Movies
                 </h1>
                 <MovieList movies={topRatedMovies} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
+                <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Popular Movies
                 </h1>
                 <MovieList movies={popularMovies} />
               </div>
               <div>
-                <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
+                <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated TV Shows
                 </h1>
                 <MovieList movies={topRatedTVShows} />
