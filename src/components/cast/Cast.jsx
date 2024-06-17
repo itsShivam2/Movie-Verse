@@ -4,26 +4,25 @@ import "react-multi-carousel/lib/styles.css";
 
 const Cast = ({ cast }) => {
   const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 1024 },
-      items: 4,
-      slidesToSlide: 1, // optional, default to 1.
-    },
     desktop: {
-      breakpoint: { max: 1024, min: 768 },
-      items: 3,
-      slidesToSlide: 1,
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5,
+      partialVisibilityGutter: 40,
     },
     tablet: {
-      breakpoint: { max: 768, min: 480 },
-      items: 2,
-      slidesToSlide: 1,
+      breakpoint: { max: 1024, min: 768 },
+      items: 3,
+      partialVisibilityGutter: 30,
+    },
+    phablet: {
+      breakpoint: { max: 768, min: 640 },
+      items: 3,
+      partialVisibilityGutter: 30,
     },
     mobile: {
-      breakpoint: { max: 480, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
+      breakpoint: { max: 640, min: 0 },
+      items: 2,
+      partialVisibilityGutter: 30,
     },
   };
 
@@ -31,31 +30,43 @@ const Cast = ({ cast }) => {
     <div className="my-8">
       <h2 className="text-3xl font-semibold mb-4">Cast</h2>
       <Carousel
-        swipeable={true}
-        draggable={true}
-        showDots={true}
-        responsive={responsive}
-        ssr={true} // means to render carousel on server-side.
-        infinite={true}
-        autoPlay={true}
+        additionalTransfrom={0}
+        arrows
         autoPlaySpeed={3000}
-        keyBoardControl={true}
-        customTransition="all .5"
-        transitionDuration={500}
-        containerClass="carousel-container"
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
+        centerMode={false}
+        className=""
+        containerClass="container"
+        dotListClass=""
+        draggable
+        focusOnSelect={false}
+        infinite
+        itemClass=""
+        keyBoardControl
+        minimumTouchDrag={80}
+        partialVisible
+        pauseOnHover
+        renderArrowsWhenDisabled={false}
+        renderButtonGroupOutside={false}
+        renderDotsOutside={false}
+        responsive={responsive}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        sliderClass=""
+        slidesToSlide={1}
+        swipeable
       >
         {cast.map((c) => (
-          <div key={c.id} className="flex flex-col items-center">
+          <div key={c.id} className="flex flex-col items-center p-2">
             <img
               src={`https://image.tmdb.org/t/p/w500${c.profile_path}`}
               alt={c.name}
-              className="w-28 h-28 rounded-full"
+              className="w-36 h-36 object-fit rounded-full"
             />
-            <p>{c.name}</p>
-            <p>{c.character}</p>
+            <p className="mt-2 text-base font-medium">{c.name}</p>
+            <p className="text-sm text-gray-400">{c.character}</p>
           </div>
         ))}
       </Carousel>

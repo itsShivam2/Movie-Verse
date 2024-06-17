@@ -5,8 +5,9 @@ import {
   searchAll,
 } from "../../apis/movieApi";
 import { getPopularTVShows, getTopRatedTVShows } from "../../apis/tvShowApi";
-import MovieList from "../../components/movieList/MovieList";
-
+import List from "../../components/list/List";
+import Spinner from "../../components/spinner/Spinner";
+import SearchResults from "../../components/searchResults/SearchResults";
 function Home() {
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
@@ -68,6 +69,7 @@ function Home() {
         setLoading(true);
         const searchResults = await searchAll(query);
         setSearchResults(searchResults);
+        console.log("searchResults", searchResults);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -79,8 +81,21 @@ function Home() {
   };
 
   return (
-    <div className="w-full bg-gray-900 text-white py-6 px-auto">
-      <section className="mb-14">
+    <div className="w-full bg-gray-900 text-white px-auto">
+      <section
+        className="mb-14"
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/w500${
+            topRatedMovies[Math.floor(Math.random() * topRatedMovies.length)]
+              ?.backdrop_path
+          })`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          opacity: 0.9,
+          height: "400px",
+        }}
+      >
         <div className="text-center">
           <h1 className="text-5xl sm:text-6xl font-bold my-4 p-2">WELCOME</h1>
           <p className="text-base font-semibold p-2">
@@ -109,46 +124,47 @@ function Home() {
 
       <div>
         <div className="w-full flex justify-end items-center mr-8 px-3">
-          <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-2xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
+          {/* <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-2xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Movies
           </button>
           <button className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-2xl text-sm px-5 py-2.5 text-center mr-2 mb-2">
             TV Shows
-          </button>
+          </button> */}
         </div>
         <div>
-          {searchResults.length > 0 ? (
+          {loading ? (
+            <div className="flex justify-center items-center py-10">
+              <Spinner />
+            </div>
+          ) : searchResults.length > 0 ? (
             <div>
-              <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
-                Search Results
-              </h1>
-              <MovieList movies={searchResults} />
+              <SearchResults searchResults={searchResults} />
             </div>
           ) : (
-            <div>
+            <div className="px-4">
               <div>
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated Movies
                 </h1>
-                <MovieList movies={topRatedMovies} />
+                <List movies={topRatedMovies} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Popular Movies
                 </h1>
-                <MovieList movies={popularMovies} />
+                <List movies={popularMovies} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 px-2 mb-6 font-sans">
                   Top Rated TV Shows
                 </h1>
-                <MovieList movies={topRatedTVShows} />
+                <List movies={topRatedTVShows} />
               </div>
               <div>
                 <h1 className="text-2xl font-bold py-1 mb-6 font-sans">
                   Popular TV Shows
                 </h1>
-                <MovieList movies={popularTVShows} />
+                <List movies={popularTVShows} />
               </div>
             </div>
           )}

@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 
-const Recommendations = ({ recommendations }) => {
+const List = ({ movies }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -58,23 +58,21 @@ const Recommendations = ({ recommendations }) => {
         slidesToSlide={1}
         swipeable
       >
-        {recommendations.map((recommendation) => (
+        {movies.map((movie) => (
           <div
-            key={recommendation.id}
+            key={movie.id}
             className="flex flex-col items-center p-2"
           >
-            <div className="flex flex-col items-center">
-              <div className="h-60 mb-6">
-                <Link to={`/${recommendation.id}`}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${recommendation.poster_path}`}
-                    alt={recommendation.title}
-                    className="w-40 h-60 rounded-lg mb-6"
-                  />
-                </Link>
+            <Link to={`/${movie.id}`}>
+              <div className="flex flex-col items-center">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt={movie.title}
+                  className="w-40 h-60 rounded-lg mb-6"
+                />
+                <h3 className="text-sm text-center">{movie.title}</h3>
               </div>
-              <h3 className="text-sm text-center">{recommendation.title}</h3>
-            </div>
+            </Link>
           </div>
         ))}
       </Carousel>
@@ -82,4 +80,4 @@ const Recommendations = ({ recommendations }) => {
   );
 };
 
-export default Recommendations;
+export default List;

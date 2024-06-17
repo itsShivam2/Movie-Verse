@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails } from "../../apis/movieApi";
+import { getTVShowDetails } from "../../apis/tvShowApi";
 import StarRating from "../../components/starRating/starRating";
 import Cast from "../../components/cast/Cast";
 import OfficialVideos from "../../components/videos/OfficialVideos";
 import Similar from "../../components/similar/Similar";
 import Recommendations from "../../components/recommendations/Recommendations";
 import Spinner from "../../components/spinner/Spinner";
-function MovieDetails() {
-  const [movie, setMovie] = useState({});
-  const { movieId } = useParams();
-  const [loading, setLoading] = useState(false);
+
+function TVShowDetails() {
+  const [tvShow, setTVShow] = useState({});
+  const { tvShowId } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const fetchTVShowDetails = async () => {
       try {
         setLoading(true);
-        const response = await getMovieDetails(movieId);
-        setMovie(response);
+        const response = await getTVShowDetails(tvShowId);
+        setTVShow(response);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -25,145 +26,115 @@ function MovieDetails() {
       }
     };
 
-    fetchMovieDetails();
-  }, [movieId]);
-
-  if (Object.keys(movie).length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  const backdropUrl = `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`;
-  const director = movie.credits?.crew?.find(
-    (member) => member.known_for_department === "Directing"
-  );
-  const writer = movie.credits?.crew?.find(
-    (member) => member.known_for_department === "Writing"
-  );
-  // const cast = movie.credits?.cast?.slice(0, 5);
+    fetchTVShowDetails();
+  }, [tvShowId]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex justify-center items-center bg-gray-900 text-white">
-        <Spinner />
-      </div>
-    );
+    return <Spinner />;
   }
 
+  if (Object.keys(tvShow).length === 0) {
+    return <div>No TV show details found.</div>;
+  }
+
+  const posterUrl = `https://image.tmdb.org/t/p/w500${tvShow.poster_path}`;
+  const backdropUrl = `https://image.tmdb.org/t/p/w500${tvShow.backdrop_path}`;
+  const creator = tvShow.created_by?.[0];
+
   return (
-    <div
-      className="min-h-screen bg-gray-900 text-white relative"
-      // style={{
-      //   backgroundImage: `url(${backdropUrl})`,
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      //   opacity: 0.99,
-      //   backgroundRepeat: "no-repeat",
-      // }}
-    >
-      {/* <div className="absolute inset-0 bg-black opacity-10"></div> */}
+    <div className="min-h-screen bg-gray-900 text-white relative">
       <section className="w-full max-w-full flex flex-col items-center justify-center py-4 px-4">
         <div className="w-full flex flex-col md:flex-row justify-between items-start px-4 my-4">
-          {/* left */}
           <div className="rounded-xl w-full flex justify-center items-center lg:w-2/6 my-4">
             <img
               src={posterUrl}
               className="rounded-xl object-cover object-center h-full md:h-[550px] w-auto"
             />
           </div>
-          {/* right */}
           <div className="w-full lg:w-4/6">
             <div className="w-full px-4 my-4">
               <h1 className="text-xl sm:text-2xl font-semibold">
-                {movie.title} {movie.release_date?.split("-")[0]}
+                {tvShow.name} {tvShow.first_air_date?.split("-")[0]}
               </h1>
               <h2 className="text-bs text-gray-300 italic font-sans">
-                {movie.tagline}
+                {tvShow.tagline}
               </h2>
             </div>
-
             <p className="w-full flex flex-wrap justify-start items-center gap-4 px-4">
-              {movie.genres?.map((genre) => (
+              {tvShow.genres?.map((genre) => (
                 <span
                   key={genre.id}
-                  className=" px-2 py-1 bg-rose-600 rounded-md text-white hover:text-gray-300 cursor-pointer"
+                  className="px-2 py-1 bg-rose-600 rounded-md text-white hover:text-gray-300 cursor-pointer"
                 >
                   {genre.name}
                 </span>
               ))}
             </p>
-
             <div className="w-full flex justify-between items-center gap-6 px-4 my-4">
               <div>
-                <StarRating rating={movie.vote_average} />
+                <StarRating rating={tvShow.vote_average} />
               </div>
             </div>
-
             <div className="w-full px-4 text-white">
               <h2 className="text-2xl font-semibold mb-2">Overview</h2>
-              <p className="text-left my-2">{movie.overview}</p>
+              <p className="text-left my-2">{tvShow.overview}</p>
             </div>
-
             <div className="w-full flex justify-between items-start gap-6 px-4 my-6">
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
                 <h3 className="text-lg font-semibold">Status</h3>
-                <span className="text-base text-gray-300">{movie.status}</span>
+                <span className="text-base text-gray-300">{tvShow.status}</span>
               </div>
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-lg font-semibold">Release Date</h3>
+                <h3 className="text-lg font-semibold">First Air Date</h3>
                 <span className="text-base text-gray-300">
-                  {movie.release_date}
+                  {tvShow.first_air_date}
                 </span>
               </div>
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-lg font-semibold">Runtime</h3>
+                <h3 className="text-lg font-semibold">Number of Seasons</h3>
                 <span className="text-base text-gray-300">
-                  {movie.runtime} min
+                  {tvShow.number_of_seasons}
                 </span>
               </div>
             </div>
-
             <div className="w-full flex-col lg:flex-row justify-between items-start gap-6 px-4 my-6">
               <div className="w-full flex flex-row justify-between items-center gap-1 mb-2 pb-2 border-b-2 border-gray-700">
-                <h3 className="text-lg font-semibold">Budget: </h3>
+                <h3 className="text-lg font-semibold">Creator: </h3>
+                <span className="text-base text-gray-300">{creator?.name}</span>
+              </div>
+              <div className="w-full flex flex-row justify-between items-center gap-1 mb-2 pb-2 border-b-2 border-gray-700">
+                <h3 className="text-lg font-semibold">Total Episodes: </h3>
                 <span className="text-base text-gray-300">
-                  ${Number(movie.budget) / 1000000} M
+                  {tvShow.number_of_episodes}
                 </span>
               </div>
               <div className="w-full flex flex-row justify-between items-center gap-1 mb-2 pb-2 border-b-2 border-gray-700">
-                <h3 className="text-lg font-semibold">Box Office: </h3>
+                <h3 className="text-lg font-semibold">Last Air Date: </h3>
                 <span className="text-base text-gray-300">
-                  ${(Number(movie?.revenue) / 1000000).toFixed(2)} M
-                </span>
-              </div>
-              <div className="w-full flex flex-row justify-between items-center gap-1 mb-2 pb-2 border-b-2 border-gray-700">
-                <h3 className="text-lg font-semibold">Director: </h3>
-                <span className="text-base text-gray-300">
-                  {director?.name}
+                  {tvShow.last_air_date}
                 </span>
               </div>
             </div>
           </div>
         </div>
-
         <div className="w-full flex justify-start px-4">
-          <Cast cast={movie.credits?.cast} />
+          <Cast cast={tvShow.credits?.cast} />
         </div>
         <div className="w-full px-4">
-        <h2 className="text-3xl font-semibold mb-4">Official Videos</h2>
-          <OfficialVideos videos={movie.videos?.results} />
+          <h2 className="text-3xl font-semibold mb-4">Official Videos</h2>
+          <OfficialVideos videos={tvShow.videos?.results} />
         </div>
         <div className="w-full px-4">
-        <h2 className="text-3xl font-semibold mb-4">Similar Movies</h2>
-          <Similar similar={movie.similar?.results} />
+          <h2 className="text-3xl font-semibold mb-4">Similar Tv Shows</h2>
+          <Similar similar={tvShow.similar?.results} />
         </div>
         <div className="w-full px-4">
-        <h2 className="text-3xl font-semibold mb-4">Recommendations</h2>
-          <Recommendations recommendations={movie.recommendations?.results} />
+          <h2 className="text-3xl font-semibold mb-4">Recommendations</h2>
+          <Recommendations recommendations={tvShow.recommendations?.results} />
         </div>
       </section>
     </div>
   );
 }
 
-export default MovieDetails;
+export default TVShowDetails;
