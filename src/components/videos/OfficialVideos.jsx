@@ -48,7 +48,7 @@ const OfficialVideos = ({ videos }) => {
         draggable
         focusOnSelect={false}
         infinite
-        itemClass="p-2" // Add padding here
+        itemClass="p-2"
         keyBoardControl
         minimumTouchDrag={80}
         partialVisible
@@ -73,7 +73,7 @@ const OfficialVideos = ({ videos }) => {
               onClick={() => handleThumbnailClick(video.id)}
             >
               {loadedVideos[video.id] ? (
-                <div className="video-container">
+                <div className="flex justify-center items-center">
                   <iframe
                     width="320"
                     height="150"
@@ -87,7 +87,7 @@ const OfficialVideos = ({ videos }) => {
                 </div>
               ) : (
                 <div className="">
-                  <div className="thumbnail-container relative">
+                  <div className="">
                     <img
                       src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
                       alt={video.name}
@@ -95,7 +95,7 @@ const OfficialVideos = ({ videos }) => {
                       height="150"
                       className="rounded-lg cursor-pointer"
                     />
-                    <div className="play-button absolute inset-0 flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

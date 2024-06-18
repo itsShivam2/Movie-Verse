@@ -19,45 +19,54 @@ function Home() {
 
   useEffect(() => {
     const fetchMoviesAndShows = async () => {
-      const storedTopRatedMovies = localStorage.getItem("topRatedMovies");
-      const storedPopularMovies = localStorage.getItem("popularMovies");
-      const storedTopRatedTVShows = localStorage.getItem("topRatedTVShows");
-      const storedPopularTVShows = localStorage.getItem("popularTVShows");
+      // const storedTopRatedMovies = localStorage.getItem("topRatedMovies");
+      // const storedPopularMovies = localStorage.getItem("popularMovies");
+      // const storedTopRatedTVShows = localStorage.getItem("topRatedTVShows");
+      // const storedPopularTVShows = localStorage.getItem("popularTVShows");
 
-      if (storedTopRatedMovies) {
-        setTopRatedMovies(JSON.parse(storedTopRatedMovies));
-      } else {
-        const topRatedMovies = await getTopRatedMovies();
-        setTopRatedMovies(topRatedMovies);
-        localStorage.setItem("topRatedMovies", JSON.stringify(topRatedMovies));
-      }
+      const topRatedMovies = await getTopRatedMovies();
+      setTopRatedMovies(topRatedMovies);
+      const popularMovies = await getPopularMovies();
+      setPopularMovies(popularMovies);
+      const topRatedTVShows = await getTopRatedTVShows();
+      setTopRatedTVShows(topRatedTVShows);
+      const popularTVShows = await getPopularTVShows();
+      setPopularTVShows(popularTVShows);
 
-      if (storedPopularMovies) {
-        setPopularMovies(JSON.parse(storedPopularMovies));
-      } else {
-        const popularMovies = await getPopularMovies();
-        setPopularMovies(popularMovies);
-        localStorage.setItem("popularMovies", JSON.stringify(popularMovies));
-      }
+      // if (storedTopRatedMovies) {
+      //   setTopRatedMovies(JSON.parse(storedTopRatedMovies));
+      // } else {
+      //   const topRatedMovies = await getTopRatedMovies();
+      //   setTopRatedMovies(topRatedMovies);
+      //   localStorage.setItem("topRatedMovies", JSON.stringify(topRatedMovies));
+      // }
 
-      if (storedTopRatedTVShows) {
-        setTopRatedTVShows(JSON.parse(storedTopRatedTVShows));
-      } else {
-        const topRatedTVShows = await getTopRatedTVShows();
-        setTopRatedTVShows(topRatedTVShows);
-        localStorage.setItem(
-          "topRatedTVShows",
-          JSON.stringify(topRatedTVShows)
-        );
-      }
+      // if (storedPopularMovies) {
+      //   setPopularMovies(JSON.parse(storedPopularMovies));
+      // } else {
+      //   const popularMovies = await getPopularMovies();
+      //   setPopularMovies(popularMovies);
+      //   localStorage.setItem("popularMovies", JSON.stringify(popularMovies));
+      // }
 
-      if (storedPopularTVShows) {
-        setPopularTVShows(JSON.parse(storedPopularTVShows));
-      } else {
-        const popularTVShows = await getPopularTVShows();
-        setPopularTVShows(popularTVShows);
-        localStorage.setItem("popularTVShows", JSON.stringify(popularTVShows));
-      }
+      // if (storedTopRatedTVShows) {
+      //   setTopRatedTVShows(JSON.parse(storedTopRatedTVShows));
+      // } else {
+      //   const topRatedTVShows = await getTopRatedTVShows();
+      //   setTopRatedTVShows(topRatedTVShows);
+      //   localStorage.setItem(
+      //     "topRatedTVShows",
+      //     JSON.stringify(topRatedTVShows)
+      //   );
+      // }
+
+      // if (storedPopularTVShows) {
+      //   setPopularTVShows(JSON.parse(storedPopularTVShows));
+      // } else {
+      //   const popularTVShows = await getPopularTVShows();
+      //   setPopularTVShows(popularTVShows);
+      //   localStorage.setItem("popularTVShows", JSON.stringify(popularTVShows));
+      // }
     };
 
     fetchMoviesAndShows();
