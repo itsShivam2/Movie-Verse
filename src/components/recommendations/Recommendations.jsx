@@ -28,7 +28,7 @@ const Recommendations = ({ recommendations }) => {
   };
 
   return (
-    <div className="my-8">
+    <div className="my-8 max-w-full overflow-hidden">
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -64,16 +64,16 @@ const Recommendations = ({ recommendations }) => {
             className="flex flex-col items-center p-2"
           >
             <div className="flex flex-col items-center">
-              <div className="h-60 mb-6">
+              <div className="h-48 sm:h-60 mb-6">
                 <Link to={`/${recommendation.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${recommendation.poster_path}`}
-                    alt={recommendation.name}
-                    className="w-40 h-60 rounded-lg mb-6"
+                    alt={recommendation.name || recommendation.title}
+                    className="w-44 h-48 sm:h-60 rounded-lg mb-6"
                   />
                 </Link>
               </div>
-              <h3 className="text-sm text-center">{recommendation.name}</h3>
+              <h3 className="text-sm text-center">{recommendation.name || recommendation.title}</h3>
             </div>
           </div>
         ))}

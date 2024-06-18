@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const OfficialVideos = ({ videos }) => {
+  const [loadedVideos, setLoadedVideos] = useState({});
+
+  const handleThumbnailClick = (id) => {
+    setLoadedVideos((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
+  };
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -27,7 +36,7 @@ const OfficialVideos = ({ videos }) => {
   };
 
   return (
-    <div className="w-full my-8">
+    <div className="my-8 max-w-full overflow-hidden">
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -39,7 +48,7 @@ const OfficialVideos = ({ videos }) => {
         draggable
         focusOnSelect={false}
         infinite
-        itemClass=""
+        itemClass="p-2" // Add padding here
         keyBoardControl
         minimumTouchDrag={80}
         partialVisible
@@ -59,17 +68,55 @@ const OfficialVideos = ({ videos }) => {
       >
         {videos.map((video) => (
           <div key={video.id} className="flex flex-col items-center p-2">
-            <div className="flex flex-col items-center">
-              <iframe
-                width="200"
-                height="150"
-                src={`https://www.youtube.com/embed/${video.key}`}
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-              <h3 className="text-sm text-left">{video.name}</h3>
+            <div
+              className="flex flex-col items-center p-4 rounded-lg shadow-md"
+              onClick={() => handleThumbnailClick(video.id)}
+            >
+              {loadedVideos[video.id] ? (
+                <div className="video-container">
+                  <iframe
+                    width="320"
+                    height="150"
+                    src={`https://www.youtube.com/embed/${video.key}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg"
+                  ></iframe>
+                </div>
+              ) : (
+                <div className="">
+                  <div className="thumbnail-container relative">
+                    <img
+                      src={`https://img.youtube.com/vi/${video.key}/hqdefault.jpg`}
+                      alt={video.name}
+                      width="320"
+                      height="150"
+                      className="rounded-lg cursor-pointer"
+                    />
+                    <div className="play-button absolute inset-0 flex items-center justify-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={2}
+                        stroke="currentColor"
+                        className="w-12 h-12 text-white"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M14.752 11.168l-5.197-3.034A1.5 1.5 0 008 9.066v5.868a1.5 1.5 0 001.555 1.502l5.197-3.034a1.5 1.5 0 000-2.6v0z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <h3 className="text-sm text-left text-white mt-2">
+                {video.name}
+              </h3>
             </div>
           </div>
         ))}

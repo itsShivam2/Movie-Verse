@@ -102,18 +102,18 @@ function MovieDetails() {
 
             <div className="w-full flex justify-between items-start gap-6 px-4 my-6">
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-lg font-semibold">Status</h3>
-                <span className="text-base text-gray-300">{movie.status}</span>
+                <h3 className="text-base sm:text-lg font-semibold">Status</h3>
+                <span className="text-sm sm:text-base text-gray-300">{movie.status}</span>
               </div>
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-lg font-semibold">Release Date</h3>
-                <span className="text-base text-gray-300">
+                <h3 className="text-base sm:text-lg font-semibold">Release Date</h3>
+                <span className="text-sm sm:text-base text-gray-300">
                   {movie.release_date}
                 </span>
               </div>
               <div className="w-1/3 flex flex-col justify-center items-start gap-1">
-                <h3 className="text-lg font-semibold">Runtime</h3>
-                <span className="text-base text-gray-300">
+                <h3 className="text-base sm:text-lg font-semibold">Runtime</h3>
+                <span className="text-sm sm:text-base text-gray-300">
                   {movie.runtime} min
                 </span>
               </div>

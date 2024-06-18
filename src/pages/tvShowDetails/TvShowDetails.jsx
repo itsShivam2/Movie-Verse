@@ -31,7 +31,7 @@ function TVShowDetails() {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-slate-900">
         <Spinner />
       </div>
     );

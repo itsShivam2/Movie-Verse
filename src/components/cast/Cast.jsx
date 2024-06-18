@@ -21,7 +21,7 @@ const Cast = ({ cast }) => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 1,
+      items: 2,
       partialVisibilityGutter: 30,
     },
   };
@@ -65,8 +65,8 @@ const Cast = ({ cast }) => {
               alt={c.name}
               className="w-36 h-36 object-fit rounded-full"
             />
-            <p className="mt-2 text-base font-medium">{c.name}</p>
-            <p className="text-sm text-gray-400">{c.character}</p>
+            <p className="mt-2 text-sm sm:text-base font-medium">{c.name}</p>
+            <p className="text-xs sm:text-sm text-gray-400">{c.character}</p>
           </div>
         ))}
       </Carousel>
