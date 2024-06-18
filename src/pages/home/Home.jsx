@@ -87,7 +87,7 @@ function Home() {
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/w500${
             topRatedMovies[Math.floor(Math.random() * topRatedMovies.length)]
-              ?.backdrop_path
+              ?.poster_path
           })`,
           backgroundSize: "cover",
           backgroundPosition: "center",

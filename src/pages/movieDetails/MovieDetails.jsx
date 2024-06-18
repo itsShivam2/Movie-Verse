@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../apis/movieApi";
-import StarRating from "../../components/starRating/starRating";
 import Cast from "../../components/cast/Cast";
-import OfficialVideos from "../../components/videos/OfficialVideos";
 import Similar from "../../components/similar/Similar";
+import StarRating from "../../components/starRating/starRating";
+import OfficialVideos from "../../components/videos/OfficialVideos";
 import Recommendations from "../../components/recommendations/Recommendations";
 import Spinner from "../../components/spinner/Spinner";
 function MovieDetails() {
@@ -37,10 +37,6 @@ function MovieDetails() {
   const director = movie.credits?.crew?.find(
     (member) => member.known_for_department === "Directing"
   );
-  const writer = movie.credits?.crew?.find(
-    (member) => member.known_for_department === "Writing"
-  );
-  // const cast = movie.credits?.cast?.slice(0, 5);
 
   if (loading) {
     return (

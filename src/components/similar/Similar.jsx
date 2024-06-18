@@ -68,13 +68,13 @@ const Similar = ({ similar }) => {
                 <Link to={`/${simi.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${simi.poster_path}`}
-                    alt={simi.title}
+                    alt={simi.name}
                     className="w-40 rounded-lg h-full object-cover object-center"
                   />
                 </Link>
               </div>
 
-              <h3 className="text-sm text-center">{simi.title}</h3>
+              <h3 className="text-sm text-center">{simi.name}</h3>
             </div>
           </div>
         ))}

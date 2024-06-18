@@ -27,7 +27,7 @@ const OfficialVideos = ({ videos }) => {
   };
 
   return (
-    <div className="my-8">
+    <div className="w-full my-8">
       <Carousel
         additionalTransfrom={0}
         arrows
@@ -69,8 +69,7 @@ const OfficialVideos = ({ videos }) => {
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               ></iframe>
-              <p>{video.name}</p>
-              <h3 className="text-sm text-center">{video.title}</h3>
+              <h3 className="text-sm text-left">{video.name}</h3>
             </div>
           </div>
         ))}

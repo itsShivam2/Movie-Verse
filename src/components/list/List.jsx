@@ -64,10 +64,10 @@ const List = ({ movies, mediaType }) => {
               <div className="flex flex-col items-center">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
+                  alt={movie.name|| movie.title}
                   className="w-40 h-60 rounded-lg mb-6"
                 />
-                <h3 className="text-sm text-center">{movie.title}</h3>
+                <h3 className="text-sm text-center">{movie.name || movie.title}</h3>
               </div>
             </Link>
           </div>

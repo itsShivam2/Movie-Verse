@@ -21,13 +21,13 @@ const Cast = ({ cast }) => {
     },
     mobile: {
       breakpoint: { max: 640, min: 0 },
-      items: 2,
+      items: 1,
       partialVisibilityGutter: 30,
     },
   };
 
   return (
-    <div className="my-8">
+    <div className="my-8 max-w-full overflow-hidden">
       <h2 className="text-3xl font-semibold mb-4">Cast</h2>
       <Carousel
         additionalTransfrom={0}

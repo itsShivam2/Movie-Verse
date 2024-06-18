@@ -68,12 +68,12 @@ const Recommendations = ({ recommendations }) => {
                 <Link to={`/${recommendation.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${recommendation.poster_path}`}
-                    alt={recommendation.title}
+                    alt={recommendation.name}
                     className="w-40 h-60 rounded-lg mb-6"
                   />
                 </Link>
               </div>
-              <h3 className="text-sm text-center">{recommendation.title}</h3>
+              <h3 className="text-sm text-center">{recommendation.name}</h3>
             </div>
           </div>
         ))}

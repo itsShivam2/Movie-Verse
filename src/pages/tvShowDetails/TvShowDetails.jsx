@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getTVShowDetails } from "../../apis/tvShowApi";
-import StarRating from "../../components/starRating/starRating";
 import Cast from "../../components/cast/Cast";
-import OfficialVideos from "../../components/videos/OfficialVideos";
 import Similar from "../../components/similar/Similar";
+import StarRating from "../../components/starRating/starRating";
+import OfficialVideos from "../../components/videos/OfficialVideos";
 import Recommendations from "../../components/recommendations/Recommendations";
 import Spinner from "../../components/spinner/Spinner";
 
@@ -30,7 +30,11 @@ function TVShowDetails() {
   }, [tvShowId]);
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Spinner />
+      </div>
+    );
   }
 
   if (Object.keys(tvShow).length === 0) {
