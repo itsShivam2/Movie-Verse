@@ -7,7 +7,7 @@ const List = ({ movies, mediaType }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5,
+      items: 4,
       partialVisibilityGutter: 40,
     },
     tablet: {
@@ -64,10 +64,12 @@ const List = ({ movies, mediaType }) => {
               <div className="flex flex-col items-center">
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.name|| movie.title}
-                  className="w-40 h-60 rounded-lg mb-6"
+                  alt={movie.name || movie.title}
+                  className="w-48 h-52 sm:w-56 sm:h-80 object-cover object-center rounded-lg"
                 />
-                <h3 className="text-sm text-center">{movie.name || movie.title}</h3>
+                <h3 className="text-sm text-center mt-6">
+                  {movie.name || movie.title}
+                </h3>
               </div>
             </Link>
           </div>

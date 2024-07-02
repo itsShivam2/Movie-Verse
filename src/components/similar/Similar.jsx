@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const Similar = ({ similar }) => {
+const Similar = ({ similar, type }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -62,16 +62,16 @@ const Similar = ({ similar }) => {
           <div key={simi.id} className="flex flex-col items-center p-2">
             <div className="flex flex-col items-center">
               <div className="h-48 sm:h-60 mb-6">
-                <Link to={`/${simi.id}`}>
+                <Link to={`/${type}/${simi.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${simi.poster_path}`}
-                    alt={simi.name||simi.title}
+                    alt={simi.name || simi.title}
                     className="w-40 h-48 sm:h-60 rounded-lg"
                   />
                 </Link>
               </div>
 
-              <h3 className="text-sm text-center">{simi.name||simi.title}</h3>
+              <h3 className="text-sm text-center">{simi.name || simi.title}</h3>
             </div>
           </div>
         ))}

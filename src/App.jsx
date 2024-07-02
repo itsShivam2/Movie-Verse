@@ -9,8 +9,7 @@ import { Routes, Route } from "react-router-dom";
 const App = () => {
   return (
     <>
-      <div className="min-h-screen bg-gray-900">
-        <Layout>
+      <div className="bg-[#04152D]">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/genre" element={<Genre />} />
@@ -18,7 +17,6 @@ const App = () => {
             <Route path="/movie/:movieId" element={<MovieDetails />} />
             <Route path="/tv/:tvShowId" element={<TVShowDetails />} />
           </Routes>
-        </Layout>
       </div>
     </>
   );

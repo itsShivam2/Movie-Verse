@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 
-const Recommendations = ({ recommendations }) => {
+const Recommendations = ({ recommendations, type }) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -65,7 +65,7 @@ const Recommendations = ({ recommendations }) => {
           >
             <div className="flex flex-col items-center">
               <div className="h-48 sm:h-60 mb-6">
-                <Link to={`/${recommendation.id}`}>
+                <Link to={`/${type}/${recommendation.id}`}>
                   <img
                     src={`https://image.tmdb.org/t/p/w500${recommendation.poster_path}`}
                     alt={recommendation.name || recommendation.title}
@@ -73,7 +73,9 @@ const Recommendations = ({ recommendations }) => {
                   />
                 </Link>
               </div>
-              <h3 className="text-sm text-center">{recommendation.name || recommendation.title}</h3>
+              <h3 className="text-sm text-center">
+                {recommendation.name || recommendation.title}
+              </h3>
             </div>
           </div>
         ))}
