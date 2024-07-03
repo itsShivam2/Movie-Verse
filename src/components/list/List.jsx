@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  CircularProgressbarWithChildren,
+  CircularProgressbar,
+  buildStyles,
+} from "react-circular-progressbar";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -65,9 +70,35 @@ const List = ({ movies, mediaType }) => {
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.name || movie.title}
-                  className="w-48 h-52 sm:w-56 sm:h-80 object-cover object-center rounded-lg"
+                  className="sm:w-60 sm:h-80 object-cover object-center rounded-lg"
                 />
-                <h3 className="text-sm text-center mt-6">
+                <div className="absolute bottom-16 sm:bottom-14 left-4 h-16 w-16 bg-white rounded-full">
+                  <CircularProgressbarWithChildren
+                    value={(movie.vote_average / 10) * 100}
+                    styles={buildStyles({
+                      pathColor:
+                        movie.vote_average >= 8
+                          ? "#2ee65c"
+                          : movie.vote_average >= 6
+                          ? "#8bc34a"
+                          : movie.vote_averagee >= 4
+                          ? "#ffeb3b"
+                          : movie.vote_average >= 2
+                          ? "#ff9800"
+                          : "#f44336",
+                      textColor: "#fff",
+                      trailColor: "#d6d6d6",
+                      backgroundColor: "#3e98c7",
+                    })}
+                  >
+                    <div>
+                      <span className="text-black text-2xl -mt-2">
+                        {movie.vote_average?.toFixed(1)}
+                      </span>
+                    </div>
+                  </CircularProgressbarWithChildren>
+                </div>
+                <h3 className="w-full text-base text-left mt-11 sm:mt-10">
                   {movie.name || movie.title}
                 </h3>
               </div>

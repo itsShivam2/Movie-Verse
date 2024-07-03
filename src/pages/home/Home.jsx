@@ -91,32 +91,31 @@ function Home() {
     }
   };
 
-  const image = `https://image.tmdb.org/t/p/w500${
-    topRatedMovies[Math.floor(Math.random() * topRatedMovies.length)]
-      .poster_path
-  }`;
+  // const image = `https://image.tmdb.org/t/p/w500${
+  //   topRatedMovies[Math.floor(Math.random() * topRatedMovies.length)]
+  //     .poster_path
+  // }`;
   return (
     <Layout>
       <div className="w-full bg-[#04152D] text-white px-auto">
         <section className="relative">
-          {image && (
-            <image
-              src={image}
-              autoPlay
-              loop
-              className="absolute w-[100vw] h-[400px] object-cover object-center opacity-30 bg-no-repeat"
-            />
-          )}
-          <div className="absolute w-full h-[400px] bg-[#c9c4c4] mix-blend-overlay"></div>
+          <video
+            src={Ocean}
+            autoPlay
+            loop
+            className="absolute w-full h-[400px] object-cover object-center opacity-30 bg-no-repeat"
+          />
 
-          <div className="text-center pt-16 mt-[70px]">
+          <div className="absolute w-full h-[400px] bg-[#8a9fac] mix-blend-overlay"></div>
+
+          <div className="relative text-center pt-16 mt-[70px] z-100">
             <h1 className="text-5xl sm:text-7xl font-bold p-2">WELCOME</h1>
             <p className="text-base md:text-xl font-semibold p-2">
               Explore the Ultimate Entertainment Universe: Discover Movies and
               TV Shows with MovieVerse!
             </p>
           </div>
-          <div className="w-full flex justify-center items-center my-12 px-4 pb-16">
+          <div className="relative w-full flex justify-center items-center my-12 px-4 pb-16 z-100">
             <input
               className="w-4/6 sm:w-3/6 p-4 rounded-l-2xl text-black text-xs sm:text-base"
               type="text"
@@ -146,7 +145,7 @@ function Home() {
           </div>
           <div>
             {loading ? (
-              <div className="flex justify-center items-center py-10">
+              <div className="min-h-80 flex justify-center items-center py-10">
                 <Spinner />
               </div>
             ) : searchResults.length > 0 ? (
