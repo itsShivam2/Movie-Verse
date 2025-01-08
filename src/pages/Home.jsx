@@ -14,6 +14,23 @@ import MediaDetails from './Details';
 import Navbar from './../components/navbar/Navbar';
 import Footer from './../components/footer/Footer';
 
+const SkeletonGrid = () => (
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        {Array.from({ length: 10 }).map((_, index) => (
+            <div
+                key={index}
+                className="rounded-lg overflow-hidden bg-gray-800 animate-pulse"
+            >
+                <div className="aspect-[2/3] bg-gray-700"></div>
+                <div className="p-4 space-y-2">
+                    <div className="h-4 bg-gray-700 rounded"></div>
+                    <div className="h-3 bg-gray-700 rounded w-1/2"></div>
+                </div>
+            </div>
+        ))}
+    </div>
+);
+
 const MovieApp = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -194,9 +211,26 @@ const MovieApp = () => {
                 {/* Main */}
                 <main className="container mx-auto px-4 py-12">
                     {isLoading ? (
-                        <div className="flex justify-center items-center h-64">
-                            <div className="text-xl">Loading...</div>
-                        </div>
+                        <>
+                            <section className="mb-12">
+                                <h2 className="text-2xl font-bold capitalize mb-6">
+                                    Trending
+                                </h2>
+                                <SkeletonGrid />
+                            </section>
+                            <section className="mb-12">
+                                <h2 className="text-2xl font-bold capitalize mb-6">
+                                    Popular
+                                </h2>
+                                <SkeletonGrid />
+                            </section>
+                            <section className="mb-12">
+                                <h2 className="text-2xl font-bold capitalize mb-6">
+                                    Top Rated
+                                </h2>
+                                <SkeletonGrid />
+                            </section>
+                        </>
                     ) : (
                         <>
                             {['trending', 'popular', 'topRated'].map((section) => (
@@ -207,19 +241,29 @@ const MovieApp = () => {
                                         </h2>
                                         <div className="flex gap-4">
                                             <button
-                                                onClick={() => setActiveTab(prev => ({ ...prev, [section]: 'movies' }))}
+                                                onClick={() =>
+                                                    setActiveTab((prev) => ({
+                                                        ...prev,
+                                                        [section]: 'movies',
+                                                    }))
+                                                }
                                                 className={`px-4 py-2 rounded-full transition ${activeTab[section] === 'movies'
-                                                    ? 'bg-blue-600 hover:bg-blue-700'
-                                                    : 'bg-gray-800 hover:bg-gray-700'
+                                                        ? 'bg-blue-600 hover:bg-blue-700'
+                                                        : 'bg-gray-800 hover:bg-gray-700'
                                                     }`}
                                             >
                                                 Movies
                                             </button>
                                             <button
-                                                onClick={() => setActiveTab(prev => ({ ...prev, [section]: 'shows' }))}
+                                                onClick={() =>
+                                                    setActiveTab((prev) => ({
+                                                        ...prev,
+                                                        [section]: 'shows',
+                                                    }))
+                                                }
                                                 className={`px-4 py-2 rounded-full transition ${activeTab[section] === 'shows'
-                                                    ? 'bg-blue-600 hover:bg-blue-700'
-                                                    : 'bg-gray-800 hover:bg-gray-700'
+                                                        ? 'bg-blue-600 hover:bg-blue-700'
+                                                        : 'bg-gray-800 hover:bg-gray-700'
                                                     }`}
                                             >
                                                 TV Shows
@@ -228,9 +272,11 @@ const MovieApp = () => {
                                     </div>
 
                                     {renderContentGrid(
-                                        section === 'trending' ? trendingContent :
-                                            section === 'popular' ? popularContent :
-                                                topRatedContent,
+                                        section === 'trending'
+                                            ? trendingContent
+                                            : section === 'popular'
+                                                ? popularContent
+                                                : topRatedContent,
                                         section
                                     )}
                                 </section>
@@ -239,7 +285,8 @@ const MovieApp = () => {
                     )}
                 </main>
             </div>
-            <Footer /></>
+            <Footer />
+        </>
     );
 };
 

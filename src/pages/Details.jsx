@@ -3,6 +3,39 @@ import { Play, Star, Calendar, Clock, DollarSign } from 'lucide-react';
 import { getMovieDetails } from './../apis/movieApi';
 import { getTVShowDetails } from './../apis/tvShowApi';
 
+
+const SkeletonLoader = () => {
+    return (
+        <div className="animate-pulse">
+            <div className="min-h-[80vh] bg-gray-800 relative">
+                <div className="absolute inset-0 bg-gray-700" />
+            </div>
+            <div className="container mx-auto px-4 pt-8">
+                <div className="flex flex-col md:flex-row gap-8">
+                    <div className="w-full md:w-1/3 lg:w-1/4 bg-gray-700 h-[30rem] rounded-lg" />
+                    <div className="w-full md:w-2/3 lg:w-3/4 space-y-4">
+                        <div className="h-10 w-3/4 bg-gray-700 rounded-md" />
+                        <div className="flex items-center gap-6">
+                            <div className="h-8 w-16 bg-gray-700 rounded-md" />
+                            <div className="h-8 w-36 bg-gray-700 rounded-full" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="h-8 bg-gray-700 rounded-md" />
+                            <div className="h-8 bg-gray-700 rounded-md" />
+                        </div>
+                        <div className="flex flex-wrap gap-2">
+                            {[...Array(4)].map((_, i) => (
+                                <div key={i} className="h-6 w-24 bg-gray-700 rounded-full" />
+                            ))}
+                        </div>
+                        <div className="h-20 bg-gray-700 rounded-md" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const MediaDetails = ({ id, type = 'movie' }) => {
     const [details, setDetails] = useState(null);
     const [activeTab, setActiveTab] = useState('recommended');
@@ -30,11 +63,7 @@ const MediaDetails = ({ id, type = 'movie' }) => {
     }, [id, type]);
 
     if (isLoading) {
-        return (
-            <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-                <div className="text-white text-xl">Loading...</div>
-            </div>
-        );
+        return <SkeletonLoader />;
     }
 
     if (error) {
@@ -75,9 +104,9 @@ const MediaDetails = ({ id, type = 'movie' }) => {
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100">
-          
+
             <div className="relative min-h-[80vh]">
-              
+
                 <div className="absolute inset-0">
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
                     <img
@@ -90,7 +119,7 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                 {/* Content */}
                 <div className="relative container mx-auto px-4 pt-32">
                     <div className="flex flex-col md:flex-row gap-8">
-                      
+
                         <div className="w-full md:w-1/3 lg:w-1/4">
                             <img
                                 src={details.poster_path ? `${posterUrl}${details.poster_path}` : '/api/placeholder/500/750'}
@@ -99,19 +128,19 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                             />
                         </div>
 
-                     
+
                         <div className="w-full md:w-2/3 lg:w-3/4">
                             <h1 className="text-4xl md:text-5xl font-bold mb-4">
                                 {details.title || details.name}
                             </h1>
 
                             <div className="flex items-center gap-6 mb-6">
-                             
+
                                 <div className={`text-xl font-bold ${getRatingColor(details.vote_average)}`}>
                                     {details.vote_average.toFixed(1)}
                                 </div>
 
-                               
+
                                 {details.videos?.results?.some(video => video.type === "Trailer") && (
                                     <button
                                         onClick={handlePlayTrailer}
@@ -124,7 +153,7 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                                 )}
                             </div>
 
-                           
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                                 <div className="flex items-center gap-2">
                                     <Calendar className="text-gray-400" size={20} />
@@ -142,7 +171,7 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                                 )}
                             </div>
 
-                          
+
                             <div className="flex flex-wrap gap-2 mb-6">
                                 {details.genres.map((genre) => (
                                     <span key={genre.id} className="px-3 py-1 bg-gray-800 rounded-full text-sm">
@@ -151,13 +180,13 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                                 ))}
                             </div>
 
-                           
+
                             <div className="mb-6">
                                 <h2 className="text-xl font-bold mb-2">Overview</h2>
                                 <p className="text-gray-300 leading-relaxed">{details.overview}</p>
                             </div>
 
-                          
+
                             <div>
                                 <h2 className="text-xl font-bold mb-2">
                                     {type === 'movie' ? 'Director' : 'Created By'}
@@ -198,8 +227,8 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                 <div className="flex items-center gap-4 mb-6">
                     <button
                         className={`px-4 py-2 rounded-full transition ${activeTab === 'recommended'
-                                ? 'bg-blue-600 hover:bg-blue-700'
-                                : 'bg-gray-800 hover:bg-gray-700'
+                            ? 'bg-blue-600 hover:bg-blue-700'
+                            : 'bg-gray-800 hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveTab('recommended')}
                     >
@@ -207,8 +236,8 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                     </button>
                     <button
                         className={`px-4 py-2 rounded-full transition ${activeTab === 'similar'
-                                ? 'bg-blue-600 hover:bg-blue-700'
-                                : 'bg-gray-800 hover:bg-gray-700'
+                            ? 'bg-blue-600 hover:bg-blue-700'
+                            : 'bg-gray-800 hover:bg-gray-700'
                             }`}
                         onClick={() => setActiveTab('similar')}
                     >
@@ -216,7 +245,7 @@ const MediaDetails = ({ id, type = 'movie' }) => {
                     </button>
                 </div>
 
-               
+
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                     {(activeTab === 'recommended' ? details.recommendations?.results : details.similar?.results)
                         ?.slice(0, 5)
