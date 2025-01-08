@@ -1,26 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function SearchResults({ searchResults }) {
+function SearchResults({ results }) {
   return (
-    <div className="w-full bg-gray-900 text-white py-6 px-auto">
-      <h1 className="text-3xl font-bold my-4 px-4">Search Results</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 px-4">
-        {searchResults.map((item) => (
-          <Link to={`/${item.media_type}/${item.id}`} key={item.id}>
-            <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {results.map((item) => (
+        <Link
+          key={item.id}
+          to={`/${item.media_type}/${item.id}`}
+          className="group relative transform transition-all duration-300 hover:scale-105"
+        >
+          <div className="rounded-lg overflow-hidden shadow-lg bg-white/5 backdrop-blur-sm">
+            <div className="relative aspect-[2/3]">
               <img
                 src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                 alt={item.title || item.name}
-                className="w-auto h-74 object-fit"
+                className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="p-4">
-              <h2 className="text-xl font-semibold text-white">{item.name}</h2>
+              <h3 className="text-white font-medium line-clamp-2">
+                {item.title || item.name}
+              </h3>
+              <p className="text-white/60 text-sm mt-1 capitalize">
+                {item.media_type}
+              </p>
             </div>
-          </Link>
-        ))}
-      </div>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }

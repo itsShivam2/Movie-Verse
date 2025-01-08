@@ -2,12 +2,14 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="flex flex-col justify-center items-center gap-2 bg-[#031022] text-white text-lg font-semibold font-sans p-4">
-      <p>All rights reserved </p>
-      <p>
-        Made by <span className="font-bold font-[cursive]">Shivam Gupta</span>
-      </p>
-    </div>
+    <footer className="bg-gray-900 border-t border-gray-800 text-gray-400 text-sm">
+      <div className="container mx-auto px-4 py-6 text-center">
+        <p>© 2025 MovieApp. All rights reserved.</p>
+        <p>
+          Made with <span className="text-red-500">❤</span> by Shivam Gupta
+        </p>
+      </div>
+    </footer>
   );
 }
 
